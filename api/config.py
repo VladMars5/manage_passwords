@@ -27,10 +27,6 @@ JWT_ALGORITHM: str = os.environ.get('JWT_ALGORITHM')
 JWT_EXPIRE_MINUTES: int = int(os.environ.get('JWT_EXPIRE_MINUTES'))
 JWT_EXPIRE_MINUTES_RESET_PASSWORD: int = int(os.environ.get('JWT_EXPIRE_MINUTES_RESET_PASSWORD'))
 
-email_templates = {'reset_password': {'subject': 'Сброс пароля PasswordManager', 'content': '<div>'
-                   '<h1 style="color: red;">Здравствуйте, Перейдите по ссылке чтобы сбросить пароль.</h1>'
-                   '<h1 style="color: red;">{}</h1></div>'}}
-
 SMTP_HOST: str = os.environ.get('SMTP_HOST')
 SMTP_PORT: int = int(os.environ.get('SMTP_PORT'))
 SMTP_USER = os.environ.get("SMTP_USER")
@@ -39,3 +35,5 @@ SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
 REDIS_HOST: str = os.environ.get('REDIS_HOST')
 REDIS_PORT: int = int(os.environ.get('REDIS_PORT'))
 REDIS_DB: str = os.environ.get('REDIS_DB')
+
+subjects = {'reset_password': 'Сброс пароля PasswordManager для пользователя {} сервиса ManagePassword'}

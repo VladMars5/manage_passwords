@@ -60,3 +60,11 @@ class AuthHelper:
         })
 
         return jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+
+
+def private_full_email(email: str) -> str:
+    emails_el = email.split('@')
+    email_username = emails_el[0]
+    count_hidden_symbol = len(email_username) // 3 if len(email_username) > 6 else len(email_username) // 2
+    els = [s for s in email_username[:len(email_username) - count_hidden_symbol]] + list('*' * count_hidden_symbol)
+    return ''.join(els) + '@' + emails_el[1]
