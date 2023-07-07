@@ -38,6 +38,14 @@ services:
     environment:
       - ServerOptions__HostName=smtp4dev
 
+  app:
+    build: .
+    env_file:
+      - .env
+    command: [ "/app/docker/api.sh" ]
+    ports:
+      - '8000:8000'
+
 volumes:
     data_postgres:
     cache_redis:

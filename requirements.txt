@@ -45,3 +45,4 @@ vine==5.0.0
 wcwidth==0.2.6
 loguru==0.7.0
 phonenumbers==8.13.11
+gunicorn
