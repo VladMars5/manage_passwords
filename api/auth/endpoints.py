@@ -197,4 +197,4 @@ async def delete_user(password_schemas: DeleteUser, helper: AuthHelper = Depends
     )
 
 
-# TODO: добавить верификацию аккаунтов пользователей
+# TODO: добавить верификацию аккаунтов пользователей по email или телефону

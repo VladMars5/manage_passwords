@@ -1,4 +1,5 @@
 import os
+import string
 
 from dotenv import load_dotenv
 
@@ -36,4 +37,7 @@ REDIS_HOST: str = os.environ.get('REDIS_HOST')
 REDIS_PORT: int = int(os.environ.get('REDIS_PORT'))
 REDIS_DB: str = os.environ.get('REDIS_DB')
 
+ENCRYPTION_KEY: bytes = os.environ.get('ENCRYPTION_KEY').encode('utf-8')
+
 subjects = {'reset_password': 'Сброс пароля PasswordManager для пользователя {} сервиса ManagePassword'}
+alphabet_password = string.ascii_letters + string.digits + string.punctuation

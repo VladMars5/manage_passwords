@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
+from jose import JWTError, jwt
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+
 from config import JWT_SECRET_KEY, JWT_ALGORITHM
 from database import get_async_session
 from auth.models import user as user_model

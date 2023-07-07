@@ -1,4 +1,5 @@
 import re
+
 import phonenumbers
 from phonenumbers.phonenumberutil import NumberParseException
 
@@ -10,9 +11,7 @@ def valid_email(email: str) -> str:
 
 
 def valid_username(username: str) -> str:
-    if len(username) > 15:
-        raise ValueError('Nickname length more than 15 characters')
-    elif not all(x.isdigit() or x.isalpha() for x in username):
+    if not all(x.isdigit() or x.isalpha() for x in username):
         raise ValueError('Nickname must contain only letters and numbers')
     elif username[0].isdigit():
         raise ValueError('Nickname cannot start with a number')
@@ -20,9 +19,7 @@ def valid_username(username: str) -> str:
 
 
 def valid_password(password: str) -> str:
-    if len(password) < 10:
-        raise ValueError('Password less than 10 characters')
-    elif password.isalpha() or password.isdigit():
+    if password.isalpha() or password.isdigit():
         raise ValueError('Password must not consist of only letters or numbers')
     return password
 

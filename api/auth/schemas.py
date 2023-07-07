@@ -1,6 +1,8 @@
-from pydantic import BaseModel, root_validator, validator
 from typing import Optional
 from datetime import datetime
+
+from pydantic import BaseModel, root_validator, validator, Field
+
 from auth.validators import valid_username, valid_email, valid_phone, valid_password
 
 
@@ -19,10 +21,10 @@ class UserInfo(BaseModel):
 
 
 class CreateUser(BaseModel):
-    email: str
-    username: str
-    password: str
-    confirmed_password: str
+    email: str = Field(max_length=100)
+    username: str = Field(max_length=15, min_length=3)
+    password: str = Field(min_length=10, max_length=30)
+    confirmed_password: str = Field(min_length=10, max_length=30)
     phone: Optional[str]
 
     _valid_email = validator('email', allow_reuse=True)(valid_email)
@@ -41,7 +43,7 @@ class CreateUser(BaseModel):
 
 
 class UpdateUser(BaseModel):
-    username: Optional[str]
+    username: Optional[str] = Field(max_length=15, min_length=3)
     phone: Optional[str]
 
     @root_validator
@@ -57,8 +59,8 @@ class UpdateUser(BaseModel):
 
 
 class ResetPassword(BaseModel):
-    email: Optional[str]
-    username: Optional[str]
+    email: Optional[str] = Field(max_length=100)
+    username: Optional[str] = Field(max_length=15, min_length=3)
 
     @root_validator
     @classmethod
@@ -75,8 +77,8 @@ class ResetPassword(BaseModel):
 
 
 class NewPassword(BaseModel):
-    new_password: str
-    confirmed_password: str
+    new_password: str = Field(max_length=30, min_length=10)
+    confirmed_password: str = Field(max_length=30, min_length=10)
 
     _valid_password = validator('new_password', allow_reuse=True)(valid_password)
 
@@ -90,9 +92,9 @@ class NewPassword(BaseModel):
 
 
 class ChangeOldPassword(BaseModel):
-    old_password: str
-    new_password: str
-    confirmed_password: str
+    old_password: str = Field(max_length=30, min_length=10)
+    new_password: str = Field(max_length=30, min_length=10)
+    confirmed_password: str = Field(max_length=30, min_length=10)
 
     _valid_password = validator('new_password', allow_reuse=True)(valid_password)
 
@@ -106,4 +108,4 @@ class ChangeOldPassword(BaseModel):
 
 
 class DeleteUser(BaseModel):
-    password: str
+    password: str = Field(max_length=30, min_length=10)

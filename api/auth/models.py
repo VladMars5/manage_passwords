@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, Table, Identity
+
 from database import metadata
 
 user = Table(
