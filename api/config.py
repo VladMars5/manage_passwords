@@ -3,7 +3,7 @@ import string
 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(os.environ.get("ENV_FILE") if os.environ.get("ENV_FILE") else '.env')
 
 DB_HOST = os.environ.get("DB_HOST")
 DB_PORT = os.environ.get("DB_PORT")

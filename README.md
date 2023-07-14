@@ -16,3 +16,5 @@
 
 
 Запуск в докере: docker compose -f docker-compose.local up -d
+
+Запуск тестов: ENV_FILE='.env.test' pytest  -v tests/

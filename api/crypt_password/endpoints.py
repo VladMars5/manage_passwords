@@ -220,7 +220,6 @@ async def get_decrypt_password(auth_data_id: Annotated[int, Query(gt=0)],
                            decrypt_password=decrypt_password(encrypted_password=auth_data.hashed_password))
 
 
-#
 @router.post('/search_auth_data', response_model=List[Optional[SearchedAuthData]])
 async def search_auth_data(search_data: SearchData,
                            session: AsyncSession = Depends(get_async_session),

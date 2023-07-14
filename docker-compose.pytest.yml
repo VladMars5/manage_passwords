@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5001:5432"
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6001:6379'
+    command: redis-server
+
+  celery:
+    build:
+      context: .
+    env_file:
+      - .env.test
+    command: [ "/app/docker/celery.sh", "celery" ]
+    depends_on:
+      - redis
+
+  smtp4dev:
+    container_name: smtp_server
+    image: rnwood/smtp4dev:v3
+    restart: always
+    ports:
+      # web interface
+      - '5002:80'
+      # SMTP
+      - '2210:25'
+      # IMAP
+      - '1430:143'
+    environment:
+      - ServerOptions__HostName=smtp4dev

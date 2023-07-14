@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from auth.endpoints import router as router_auth
 from crypt_password.endpoints import router as router_crypt
 
+# TODO: добавить логирование gunicorn
+
 app = FastAPI(
     title="Passwords Manager App"
 )

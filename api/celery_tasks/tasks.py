@@ -8,8 +8,6 @@ celery = Celery('celery_tasks',
                 broker=f'redis://{REDIS_HOST}:{REDIS_PORT}',
                 backend=f'redis://{REDIS_HOST}:{REDIS_PORT}')
 
-# celery.conf.imports = ['celery_tasks.tasks']
-
 
 def get_content_html(type_email: str) -> str or None:
     try:
