@@ -1,9 +1,10 @@
 import os
 import string
+import logging
 
 from dotenv import load_dotenv
 
-load_dotenv(os.environ.get("ENV_FILE") if os.environ.get("ENV_FILE") else '.env')
+load_dotenv(os.environ.get("ENV_FILE") if os.environ.get("ENV_FILE") else None)
 
 DB_HOST = os.environ.get("DB_HOST")
 DB_PORT = os.environ.get("DB_PORT")
@@ -41,3 +42,7 @@ ENCRYPTION_KEY: bytes = os.environ.get('ENCRYPTION_KEY').encode('utf-8')
 
 subjects = {'reset_password': 'Сброс пароля PasswordManager для пользователя {} сервиса ManagePassword'}
 alphabet_password = string.ascii_letters + string.digits + string.punctuation
+
+LOG_LEVEL = logging.getLevelName(os.environ.get("LOG_LEVEL", "INFO"))
+JSON_LOGS = True if os.environ.get("JSON_LOGS", "0") == "1" else False
+WORKERS = int(os.environ.get("GUNICORN_WORKERS", "5"))
